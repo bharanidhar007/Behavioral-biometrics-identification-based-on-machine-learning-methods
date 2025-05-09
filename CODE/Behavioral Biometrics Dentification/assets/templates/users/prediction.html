@@ -1,0 +1,52 @@
+{% extends 'users/userbase.html' %}
+{% block title %}{% endblock %}
+{% block admin_home %}active{% endblock %}
+
+{% block contents %}
+
+<style>
+
+    .jumbotron {
+        margin-top: 20%;
+        height: 250px;
+        background: #fff;
+    }
+    table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 95%;
+  }
+  
+  td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+  
+  tr:nth-child(even) {
+    background-color: #dddddd;
+  }
+</style>
+<center>
+    <section id="main" class="align-items-center">
+        <div class="jumbotron">
+
+            <div class="col-md-12">
+               <form action="{% url 'predict' %}" method="POST">
+                {% csrf_token %}
+                {% if activity %}
+                <h5>Your activity is {{activity}}</h5>
+                {% endif %}
+                 <label>Give an index value of Sensor Inputs, between 0 and 5162</label></br></br>
+                 <input type="number" name="index_no" min="0" max="5162" required>
+                 <button type="submit">Submit</button>
+               </form>
+            </div>
+        </div>
+        <div>
+            <h2>Sample Sensor captured data</h2>
+            {{testData|safe}}
+        </div>
+    </section>
+</center>
+    {% endblock %}
